@@ -3,11 +3,20 @@
 import 'package:flutter/material.dart';
 
 class CustomTextfield extends StatelessWidget {
-  CustomTextfield({super.key, this.hintText});
+  CustomTextfield({super.key, this.onChanged, this.hintText});
   String? hintText;
+  Function(String)? onChanged;
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      validator: (data) {
+        if (data!.isEmpty) {
+          return 'Field is required';
+        } else if (data.length < 8) {
+          return 'E-mail and Password cannot be less than 8 characters';
+        }
+      },
+      onChanged: onChanged,
       style: const TextStyle(
         color: Colors.white,
       ),
