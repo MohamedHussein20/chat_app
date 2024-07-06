@@ -1,5 +1,6 @@
 import 'package:chat_app/constants.dart';
 import 'package:chat_app/helper/show_snack_bar.dart';
+import 'package:chat_app/pages/chat_page.dart';
 import 'package:chat_app/pages/register_page.dart';
 import 'package:chat_app/widgets/custom_button.dart';
 import 'package:chat_app/widgets/custom_textfield.dart';
@@ -12,6 +13,7 @@ String? password;
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+  static String id = "LoginPage";
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -92,18 +94,20 @@ class _LoginPageState extends State<LoginPage> {
                         // Code that may throw the exception
 
                         await LoginUser();
-                        showSnackBar(context, ' Success');
+                        Navigator.pushNamed(context, ChatPage.id);
                       } on FirebaseAuthException catch (e) {
                         // Handle specific Firebase Auth exception
                         if (e.code == 'invalid-credential' ||
                             e.code == 'user-disabled' ||
                             e.code == 'operation-not-allowed') {
-                          showSnackBar(context,
-                          //wrong email or password
+                          showSnackBar(
+                              context,
+                              //wrong email or password
                               "There was a problem logging in. Check your email and password or create an account..");
                         } else {
-                          showSnackBar(context,
-                          //not completed
+                          showSnackBar(
+                              context,
+                              //not completed
                               "An unexpected error occurred. Please try again later.");
                         }
                       } catch (e) {
