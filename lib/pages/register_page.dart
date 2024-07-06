@@ -1,3 +1,4 @@
+import 'package:chat_app/helper/show_snack_bar.dart';
 import 'package:chat_app/widgets/custom_button.dart';
 import 'package:chat_app/widgets/custom_textfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -68,13 +69,13 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ],
                 ),
-                CustomTextfield(
+                CustomFormTextfield(
                   onChanged: (data) {
                     email = data;
                   },
                   hintText: 'E-mail',
                 ),
-                CustomTextfield(
+                CustomFormTextfield(
                   onChanged: (data) {
                     password = data;
                   },
@@ -87,27 +88,22 @@ class _RegisterPageState extends State<RegisterPage> {
                   onTap: () async {
                     if (formKey.currentState!.validate()) {
                       isLoading = true;
-                      setState(() {
-                        
-                      });
+                      setState(() {});
                       try {
                         await RegisterUser();
-                        ShowSnackBar(context, 'Success');
+                        showSnackBar(context, 'Success');
                       } on FirebaseAuthException catch (e) {
                         if (e.code == 'weak-password') {
-                          ShowSnackBar(context, 'Weak password');
+                          showSnackBar(context, 'Weak password');
                         } else if (e.code == 'email-already-in-use') {
-                          ShowSnackBar(context, 'Email already exists');
+                          showSnackBar(context, 'Email already exists');
                         }
                       } catch (e) {
-                        ShowSnackBar(context, 'There was an error');
+                        showSnackBar(context, 'There was an error');
                       }
                       isLoading = false;
-                      setState(() {
-                      });
-                      
-                    } else {
-                    }
+                      setState(() {});
+                    } else {}
                   },
                   title: 'Register',
                 ),
@@ -137,14 +133,6 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  void ShowSnackBar(BuildContext context, String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
       ),
     );
   }
