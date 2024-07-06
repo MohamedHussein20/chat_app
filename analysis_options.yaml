@@ -9,6 +9,7 @@
 # packages, and plugins designed to encourage good coding practices.
 analyzer:
   errors:
+    body_might_complete_normally_nullable: ignore
     must_be_immutable: ignore
     non_constant_identifier_names: ignore
     unused_local_variable: ignore
