@@ -1,4 +1,3 @@
-import 'package:chat_app/constants.dart';
 import 'package:chat_app/models/message.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +10,7 @@ class ChatBubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: Alignment.centerLeft,
+      alignment: Alignment.centerRight,
       child: Container(
         padding: const EdgeInsets.only(
           left: 16,
@@ -27,9 +26,9 @@ class ChatBubble extends StatelessWidget {
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(32),
             topRight: Radius.circular(32),
-            bottomRight: Radius.circular(32),
+            bottomLeft: Radius.circular(32),
           ),
-          color: kPrimaryColor,
+          color: Color(0xff006488),
         ),
         child: Text(
           message.message,

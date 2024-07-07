@@ -2,6 +2,7 @@ import 'package:chat_app/firebase_options.dart';
 import 'package:chat_app/pages/chat_page.dart';
 import 'package:chat_app/pages/login_page.dart';
 import 'package:chat_app/pages/register_page.dart';
+import 'package:chat_app/pages/splash_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -22,10 +23,11 @@ class ChatApp extends StatelessWidget {
       routes: {
         RegisterPage.id: (context) => const RegisterPage(),
         LoginPage.id: (context) => const LoginPage(),
-        ChatPage.id: (context) => ChatPage()
+        ChatPage.id: (context) => ChatPage(),
+        SplashPage.id: (context) => const SplashPage(),
       },
       debugShowCheckedModeBanner: false,
-      initialRoute: LoginPage.id,
+      initialRoute: SplashPage.id,
     );
   }
 }

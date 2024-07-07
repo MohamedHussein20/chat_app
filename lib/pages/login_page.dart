@@ -80,6 +80,7 @@ class _LoginPageState extends State<LoginPage> {
                   onChanged: (data) {
                     password = data;
                   },
+                  obsecureText: true,
                   hintText: 'Password',
                 ),
                 const SizedBox(

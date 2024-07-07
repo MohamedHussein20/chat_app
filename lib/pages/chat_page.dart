@@ -1,6 +1,7 @@
 import 'package:chat_app/constants.dart';
 import 'package:chat_app/models/message.dart';
 import 'package:chat_app/widgets/chat_bubble.dart';
+import 'package:chat_app/widgets/chat_bubble_for_friends.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -57,9 +58,13 @@ class ChatPage extends StatelessWidget {
                         controller: _controller,
                         itemCount: messagesList.length,
                         itemBuilder: (context, index) {
-                          return ChatBubble(
-                            message: messagesList[index],
-                          );
+                          return messagesList[index].id == email
+                              ? ChatBubble(
+                                  message: messagesList[index],
+                                )
+                              : ChatBubbleForFriends(
+                                  message: messagesList[index],
+                                );
                         }),
                   ),
                   Padding(
@@ -100,7 +105,7 @@ class ChatPage extends StatelessWidget {
               ),
             );
           } else {
-            return const Text('Loading');
+            return const Scaffold();
           }
         });
   }

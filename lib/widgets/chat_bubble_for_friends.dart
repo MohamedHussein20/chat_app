@@ -1,3 +1,4 @@
+import 'package:chat_app/constants.dart';
 import 'package:chat_app/models/message.dart';
 import 'package:flutter/material.dart';
 
@@ -28,7 +29,7 @@ class ChatBubbleForFriends extends StatelessWidget {
             topRight: Radius.circular(32),
             bottomRight: Radius.circular(32),
           ),
-          color: Colors.orange,
+          color: kPrimaryColor,
         ),
         child: Text(
           message.message,
