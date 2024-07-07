@@ -94,7 +94,11 @@ class _LoginPageState extends State<LoginPage> {
                         // Code that may throw the exception
 
                         await LoginUser();
-                        Navigator.pushNamed(context, ChatPage.id);
+                        Navigator.pushNamed(
+                          context,
+                          ChatPage.id,
+                          arguments: email,
+                        );
                       } on FirebaseAuthException catch (e) {
                         // Handle specific Firebase Auth exception
                         if (e.code == 'invalid-credential' ||

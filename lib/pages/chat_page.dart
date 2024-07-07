@@ -16,8 +16,9 @@ class ChatPage extends StatelessWidget {
   ChatPage({super.key});
   @override
   Widget build(BuildContext context) {
+    String email = ModalRoute.of(context)!.settings.arguments as String;
     return StreamBuilder<QuerySnapshot>(
-        stream: messages.orderBy(kCreatedAt).snapshots(),
+        stream: messages.orderBy(kCreatedAt, descending: true).snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<Message> messagesList = [];
@@ -52,7 +53,8 @@ class ChatPage extends StatelessWidget {
                 children: [
                   Expanded(
                     child: ListView.builder(
-                      controller: _controller,
+                        reverse: true,
+                        controller: _controller,
                         itemCount: messagesList.length,
                         itemBuilder: (context, index) {
                           return ChatBubble(
@@ -67,14 +69,17 @@ class ChatPage extends StatelessWidget {
                       onSubmitted: (value) {
                         messages.add(
                           {
+                            'id': email,
                             kMessage: value,
                             kCreatedAt: DateTime.now(),
                           },
                         );
                         controller.clear();
-                        _controller.animateTo(_controller.position.maxScrollExtent,
-                         duration: const Duration(seconds: 1),
-                          curve: Curves.fastOutSlowIn,);
+                        _controller.animateTo(
+                          0,
+                          duration: const Duration(seconds: 1),
+                          curve: Curves.fastOutSlowIn,
+                        );
                       },
                       cursorColor: kPrimaryColor,
                       decoration: InputDecoration(
